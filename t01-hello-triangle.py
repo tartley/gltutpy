@@ -1,16 +1,19 @@
 
 from ctypes import c_void_p
+
 from OpenGL import GL
 from OpenGL.GL.shaders import compileShader, compileProgram
 from OpenGL.GL.ARB.vertex_array_object import glBindVertexArray
-from framework import glGenVertexArray
 import pyglet
+
+from framework import glGenVertexArray
 
 # This is lame. What's the right way to get the sizeof(GLfloat) ?
 # Tried sys.getsizeof(GLfloat), sys.getsizeof(GLfloat()),
 # GLfloat().__sizeof__(). All give different wrong answers (size of python
 # objects, not of underlying C 'float' type)
 sizeOfFloat = 4
+vertexComponents = 4
 
 vertexPositions = [
      0.75,  0.75,  0.0,  1.0,
@@ -71,8 +74,10 @@ def display():
     GL.glUseProgram(theProgram)
     GL.glBindBuffer(GL.GL_ARRAY_BUFFER, positionBufferObject)
     GL.glEnableVertexAttribArray(0)
-    GL.glVertexAttribPointer(0, 4, GL.GL_FLOAT, False, 0, c_void_p(0))
-    GL.glDrawArrays(GL.GL_TRIANGLES, 0, 3)
+    GL.glVertexAttribPointer(
+        0, vertexComponents, GL.GL_FLOAT, False, 0, c_void_p(0)
+    )
+    GL.glDrawArrays(GL.GL_TRIANGLES, 0, len(vertexPositions) / vertexComponents)
     GL.glDisableVertexAttribArray(0)
     GL.glUseProgram(0)
 
@@ -83,7 +88,7 @@ def reshape(width, height):
 
 def main():
     global window
-    window = pyglet.window.Window()
+    window = pyglet.window.Window(resizable=True)
     window.on_draw = display
     window.on_resize = reshape
     init()
