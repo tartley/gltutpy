@@ -8,6 +8,9 @@ import pyglet
 
 from framework import glGenVertexArray
 
+
+null = c_void_p(0)
+
 # This is lame. What's the right way to get the sizeof(GLfloat) ?
 # Tried sys.getsizeof(GLfloat), sys.getsizeof(GLfloat()),
 # GLfloat().__sizeof__(). All give different wrong answers (size of python
@@ -88,9 +91,7 @@ def display():
     GL.glUseProgram(theProgram)
     GL.glBindBuffer(GL.GL_ARRAY_BUFFER, positionBufferObject)
     GL.glEnableVertexAttribArray(0)
-    GL.glVertexAttribPointer(
-        0, vertexComponents, GL.GL_FLOAT, False, 0, c_void_p(0)
-    )
+    GL.glVertexAttribPointer(0, vertexComponents, GL.GL_FLOAT, False, 0, null)
 
     GL.glDrawArrays(GL.GL_TRIANGLES, 0, len(vertexPositions) / vertexComponents)
 

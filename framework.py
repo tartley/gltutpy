@@ -9,6 +9,8 @@ from OpenGL.GL.ARB import vertex_array_object
 def glGenVertexArray():
     '''
     Return the integer ID of the created vertex object array
+    We always create one ID - we're not as flexible as the underlying OpenGL
+    function which could create an array of several of them.
     '''
     vao_id = GL.GLuint(0)
     vertex_array_object.glGenVertexArrays(1, vao_id)
