@@ -13,14 +13,18 @@ from framework import glGenVertexArray
 # GLfloat().__sizeof__(). All give different wrong answers (size of python
 # objects, not of underlying C 'float' type)
 sizeOfFloat = 4
-vertexComponents = 4
 
+# Three vertices, with an x,y,z & w for each.
 vertexPositions = [
      0.75,  0.75,  0.0,  1.0,
      0.75, -0.75,  0.0,  1.0,
     -0.75, -0.75,  0.0,  1.0,
 ]
+vertexComponents = 4
 
+# So that the shaders work on my OpenGL2.1 hardware, I've removed the
+# 'version 330' line, and have stopped requesting a layout location for the
+# vertex position.
 strVertexShader = """
 in vec4 position;
 void main()
@@ -38,11 +42,20 @@ void main()
 
 
 window = None
+
+# integer handle identifying our compiled shader program
 theProgram = None
+
+# integer handle identifying the GPU memory storing our vertex position array
 positionBufferObject = None
 
 
 def initialize_program():
+    """
+    Instead of calling OpenGL's shader compilation functions directly
+    (glShaderSource, glCompileShader, etc), we use PyOpenGL's wrapper
+    functions, which are much simpler to use.
+    """
     global theProgram
     theProgram = compileProgram(
         compileShader(strVertexShader, GL.GL_VERTEX_SHADER),
@@ -71,13 +84,16 @@ def init():
 def display():
     GL.glClearColor(0.0, 0.0, 0.0, 0.0)
     GL.glClear(GL.GL_COLOR_BUFFER_BIT)
+
     GL.glUseProgram(theProgram)
     GL.glBindBuffer(GL.GL_ARRAY_BUFFER, positionBufferObject)
     GL.glEnableVertexAttribArray(0)
     GL.glVertexAttribPointer(
         0, vertexComponents, GL.GL_FLOAT, False, 0, c_void_p(0)
     )
+
     GL.glDrawArrays(GL.GL_TRIANGLES, 0, len(vertexPositions) / vertexComponents)
+
     GL.glDisableVertexAttribArray(0)
     GL.glUseProgram(0)
 
