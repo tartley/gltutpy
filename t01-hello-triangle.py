@@ -6,7 +6,7 @@ from OpenGL.GL.shaders import compileShader, compileProgram
 from OpenGL.GL.ARB.vertex_array_object import glBindVertexArray
 import pyglet
 
-from framework import glGenVertexArray
+from glwrap import glGenVertexArray
 
 
 null = c_void_p(0)
@@ -110,10 +110,11 @@ def reshape(width, height):
 
 def main():
     global window
-    window = pyglet.window.Window(resizable=True)
+    window = pyglet.window.Window(resizable=True, fullscreen=False)
     window.on_draw = display
     window.on_resize = reshape
     init()
+    # pyglet's default keyboard handler will exit when escape is pressed
     pyglet.app.run()
 
 
