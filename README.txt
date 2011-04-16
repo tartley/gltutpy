@@ -14,6 +14,23 @@ pyglet 1.1.4
 PyOpenGL 3.0.1
 
 
+Changes from original
+---------------------
+
+For ease of cross-referencing, I've tried to stay true to the original C
+samples. I kept the overall structure of the code, and names of functions
+and variables, even when they aren't Pythonic.
+
+I have made changes here and there to make the samples run on my OpenGL2.1
+hardware. The original C targets OpenGL3.3. This has required:
+
+ * I removed the 'version 330' lines from all shaders
+ * I removed the 'layout(location = 0)' parts from the declaration of
+   vertex attributes in the shaders.
+ * Function glGenVertexArray is an ARB extension, rather than in the same
+   namespace as the other functions.
+
+
 Thanks
 ------
 
