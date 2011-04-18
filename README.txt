@@ -24,8 +24,8 @@ and variables, even when they aren't Pythonic.
 I have made changes here and there to make the samples run on my OpenGL2.1
 hardware. The original C targets OpenGL3.3. This has required:
 
- * I removed the 'version 330' lines from all shaders
- * I removed the 'layout(location = 0)' parts from the declaration of
+ * Changed shader GLSL version declaration from '#version 330' to '#version 120'
+ * Removed the 'layout(location = 0)' parts from the declaration of
    vertex attributes in the shaders.
  * Function glGenVertexArray is an ARB extension, rather than in the same
    namespace as the other functions.

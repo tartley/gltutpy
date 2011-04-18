@@ -29,6 +29,8 @@ vertexComponents = 4
 # 'version 330' line, and have stopped requesting a layout location for the
 # vertex position.
 strVertexShader = """
+#version 120
+
 in vec4 position;
 void main()
 {
@@ -36,6 +38,8 @@ void main()
 }
 """
 strFragmentShader = """
+#version 120
+
 out vec4 outputColor;
 void main()
 {
