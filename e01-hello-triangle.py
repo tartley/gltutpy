@@ -106,6 +106,9 @@ def display():
     GL.glDisableVertexAttribArray(0)
     GL.glUseProgram(0)
 
+    # equivalent of glutSwapBuffers and glutPostRedisplay is done for us by
+    # pyglet
+
 
 # Called when the window is resized, including once at application start-up
 def reshape(width, height):

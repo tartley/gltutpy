@@ -22,9 +22,8 @@ x, y and z), oriented thus::
 Thus, when compared to screen, x goes right, y goes up and z goes in, away from
 the viewer.
 
-
-Rasterisation overview
-----------------------
+Render pipeline
+---------------
 
 0. Vertex shader
 ................
@@ -35,6 +34,9 @@ up to 15 other user-defined vertex attributes.
 Output of vertex shader::
 
     out vec4 gl_Position;
+
+Then output goes to rasterisation (steps 1-6.)
+
 
 1. Clip space transform
 .......................
@@ -168,4 +170,10 @@ A: He is able to use 4 components on the input because he specifies that
 number to the glVertexAttributePointer call, second attribute GLuint size=4.
 Still doesn't explain why he chooses to do this rather than just using 3. Does
 it make the transform to clip-space simpler and hence quicker?
+
+CORRECTION: In Tutorial 3 (example 2.3), Buffer Object Initialisation, right by
+where the text says 'this code hasn't changed', the buffer dynamism param has
+actually changed to GL_STREAM_DRAW. It should possibly be GL_STATIC_DRAW like
+the previous example. Introducing this change in tutorial 3 is probably what
+was intended.
 
