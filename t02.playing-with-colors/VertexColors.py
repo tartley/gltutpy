@@ -12,7 +12,7 @@ from glwrap import glGenVertexArray
 
 null = c_void_p(0)
 
-sizeOfFloat = ctypes.sizeof(GLfloat)
+sizeOfFloat = ctypes.sizeof(GL.GLfloat)
 
 # Three vertices, with an x,y,z & w for each.
 vertexData = [
