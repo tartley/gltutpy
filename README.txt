@@ -10,8 +10,8 @@ Requirements
 ------------
 
 Python 2.7
-pyglet 1.1.4
-PyOpenGL 3.0.1
+
+and packages as listed in requirements.txt
 
 
 Changes from original
