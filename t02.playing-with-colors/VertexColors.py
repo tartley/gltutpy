@@ -1,4 +1,4 @@
-
+import ctypes
 from ctypes import c_void_p
 from os.path import dirname, join
 
@@ -12,11 +12,7 @@ from glwrap import glGenVertexArray
 
 null = c_void_p(0)
 
-# This is lame. What's the right way to get the sizeof(GLfloat) ?
-# Tried sys.getsizeof(GLfloat), sys.getsizeof(GLfloat()),
-# GLfloat().__sizeof__(). All give different wrong answers (size of python
-# objects, not of underlying C 'float' type)
-sizeOfFloat = 4
+sizeOfFloat = ctypes.sizeof(GLfloat)
 
 # Three vertices, with an x,y,z & w for each.
 vertexData = [
